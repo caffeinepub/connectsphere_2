@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans.woff2") format("woff2");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque.woff2") format("woff2");
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Dark navy base */
+    --background: 0.082 0.018 265;
+    --foreground: 0.97 0.01 270;
+
+    /* Card surfaces - dark slate */
+    --card: 0.1 0.022 265;
+    --card-foreground: 0.97 0.01 270;
+
+    /* Popover */
+    --popover: 0.11 0.024 265;
+    --popover-foreground: 0.97 0.01 270;
+
+    /* Primary - purple CTA */
+    --primary: 0.52 0.22 300;
+    --primary-foreground: 0.97 0.01 270;
+
+    /* Secondary - muted slate */
+    --secondary: 0.16 0.025 265;
+    --secondary-foreground: 0.97 0.01 270;
+
+    /* Muted */
+    --muted: 0.14 0.02 265;
+    --muted-foreground: 0.58 0.04 265;
+
+    /* Accent - cyan */
+    --accent: 0.75 0.17 195;
+    --accent-foreground: 0.082 0.018 265;
+
+    /* Destructive */
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    /* Borders */
+    --border: 0.22 0.03 265;
+    --input: 0.18 0.025 265;
+    --ring: 0.52 0.22 300;
+
+    /* Charts */
+    --chart-1: 0.6 0.22 300;
+    --chart-2: 0.72 0.17 195;
+    --chart-3: 0.65 0.2 330;
+    --chart-4: 0.56 0.22 260;
+    --chart-5: 0.7 0.18 160;
+
+    /* Sidebar */
+    --sidebar: 0.09 0.02 265;
+    --sidebar-foreground: 0.97 0.01 270;
+    --sidebar-primary: 0.52 0.22 300;
+    --sidebar-primary-foreground: 0.97 0.01 270;
+    --sidebar-accent: 0.14 0.02 265;
+    --sidebar-accent-foreground: 0.97 0.01 270;
+    --sidebar-border: 0.22 0.03 265;
+    --sidebar-ring: 0.52 0.22 300;
+
+    /* Custom aurora tokens */
+    --aurora-purple: oklch(0.52 0.28 300);
+    --aurora-magenta: oklch(0.6 0.28 330);
+    --aurora-cyan: oklch(0.78 0.2 195);
+    --aurora-blue: oklch(0.55 0.22 260);
+    --glow-purple: oklch(0.52 0.22 300 / 0.4);
+    --glow-cyan: oklch(0.78 0.2 195 / 0.4);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .aurora-bg {
+    background: radial-gradient(
+        ellipse 80% 60% at 50% -10%,
+        oklch(0.52 0.28 300 / 0.35) 0%,
+        oklch(0.6 0.28 330 / 0.25) 30%,
+        oklch(0.78 0.2 195 / 0.15) 60%,
+        transparent 80%
+      ), oklch(0.082 0.018 265);
+  }
+
+  .gradient-border {
+    position: relative;
+  }
+
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      oklch(0.52 0.28 300),
+      oklch(0.6 0.28 330),
+      oklch(0.78 0.2 195)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .glow-card {
+    box-shadow: 0 0 0 1px oklch(0.52 0.28 300 / 0.3), 0 4px 24px
+      oklch(0.52 0.28 300 / 0.12), 0 1px 3px oklch(0 0 0 / 0.5);
+  }
+
+  .glow-card-hover:hover {
+    box-shadow: 0 0 0 1px oklch(0.52 0.28 300 / 0.5), 0 8px 32px
+      oklch(0.52 0.28 300 / 0.2), 0 2px 6px oklch(0 0 0 / 0.5);
+  }
+
+  .btn-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.48 0.25 300),
+      oklch(0.58 0.26 330)
+    );
+    transition: all 0.2s ease;
+  }
+
+  .btn-gradient:hover {
+    background: linear-gradient(
+      135deg,
+      oklch(0.54 0.27 300),
+      oklch(0.64 0.28 330)
+    );
+    box-shadow: 0 4px 20px oklch(0.52 0.28 300 / 0.4);
+    transform: translateY(-1px);
+  }
+
+  .btn-gradient:active {
+    transform: translateY(0);
+  }
+
+  .glass-nav {
+    background: oklch(0.085 0.02 265 / 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid oklch(0.22 0.03 265 / 0.6);
+  }
+
+  .text-aurora {
+    background: linear-gradient(
+      135deg,
+      oklch(0.75 0.22 300),
+      oklch(0.72 0.26 330),
+      oklch(0.8 0.18 195)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.22 0.03 265) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: oklch(0.22 0.03 265);
+    border-radius: 2px;
+  }
+}
